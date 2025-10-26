@@ -56,6 +56,8 @@ A modern, responsive news aggregator built with React, Vite, and Tailwind CSS. S
 
 ```
 feeds/
+├── api/
+│   └── news.js                   # Serverless proxy for News API (CORS fix)
 ├── public/
 │   └── feeds.png                 # App logo
 ├── src/
@@ -143,6 +145,42 @@ npm run preview      # Preview production build locally
 ```bash
 npm run lint         # Run ESLint to check code quality
 ```
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. **Push your code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
+
+2. **Import to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Import Project"
+   - Select your GitHub repository
+   - Vercel will auto-detect Vite settings
+
+3. **Add Environment Variable**
+   - In Vercel dashboard, go to Settings → Environment Variables
+   - Add `VITE_NEWS_API_KEY` with your News API key
+   - Add `VITE_NEWS_API_BASE_URL` with value `https://newsapi.org/v2`
+
+4. **Deploy**
+   - Click "Deploy"
+   - Your app will be live at `https://your-project.vercel.app`
+
+### Important: CORS and API Proxy
+
+The app uses a serverless function (`/api/news.js`) to proxy News API requests. This is required because News API's free tier doesn't allow browser requests from deployed domains (CORS restriction).
+
+**How it works:**
+- **Development** (localhost): Direct API calls work fine
+- **Production** (Vercel): Requests go through `/api/news` proxy
+
+The proxy is automatically configured in `vercel.json` and `src/utils/api.jsx`.
 
 ## 🎨 Features in Detail
 

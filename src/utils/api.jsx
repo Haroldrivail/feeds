@@ -46,11 +46,30 @@ export const fetchWithCache = async (url, forceRefresh = false) => {
 };
 
 // News API configuration
+// Use proxy in production to avoid CORS issues
+const IS_PRODUCTION = import.meta.env.PROD;
+const API_PROXY = '/api/news';
 const NEWS_API_BASE_URL = import.meta.env.VITE_NEWS_API_BASE_URL;
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
 // Helper function to build News API URLs
 const buildNewsApiUrl = (endpoint, params = {}) => {
+  // In production, use the serverless proxy
+  if (IS_PRODUCTION) {
+    const url = new URL(API_PROXY, window.location.origin);
+    url.searchParams.append('endpoint', endpoint);
+    
+    // Add other parameters
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        url.searchParams.append(key, value);
+      }
+    });
+    
+    return url.toString();
+  }
+  
+  // In development, use News API directly
   const url = new URL(`${NEWS_API_BASE_URL}${endpoint}`);
   
   // Add API key
