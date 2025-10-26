@@ -23,7 +23,7 @@ export default function FeedCard({ article, highlightText }) {
             <>
                 {parts.map((part, i) =>
                     part.toLowerCase() === highlightText.toLowerCase() ?
-                        <span key={i} className="text-gray-300 font-semibold">{part}</span> :
+                        <span key={i} className="text-gray-300 dark:text-gray-400 font-semibold">{part}</span> :
                         part
                 )}
             </>
@@ -61,7 +61,7 @@ export default function FeedCard({ article, highlightText }) {
 
     return (
         <div
-            className="w-full bg-gray-800 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
+            className="w-full bg-gray-800 dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
             onClick={handleArticleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -80,7 +80,7 @@ export default function FeedCard({ article, highlightText }) {
                 {/* Source badge */}
                 {article.source?.name && (
                     <div className="absolute top-2 left-2">
-                        <span className="px-2 py-1 bg-gray-600 bg-opacity-80 text-white text-xs rounded-full">
+                        <span className="px-2 py-1 bg-gray-600 dark:bg-gray-700 bg-opacity-80 text-white text-xs rounded-full">
                             {article.source.name}
                         </span>
                     </div>
@@ -88,7 +88,7 @@ export default function FeedCard({ article, highlightText }) {
 
                 {/* Published date */}
                 <div className="absolute bottom-2 right-2">
-                    <span className="px-2 py-1 bg-gray-900 bg-opacity-80 text-white text-xs rounded-full">
+                    <span className="px-2 py-1 bg-gray-900 dark:bg-black bg-opacity-80 text-white text-xs rounded-full">
                         {formatDate(article.publishedAt)}
                     </span>
                 </div>
@@ -100,7 +100,7 @@ export default function FeedCard({ article, highlightText }) {
                 </h2>
                 
                 {article.description && (
-                    <p className="mt-2 text-gray-400 text-sm leading-relaxed">
+                    <p className="mt-2 text-gray-400 dark:text-gray-500 text-sm leading-relaxed">
                         {highlightText ? 
                             highlightTextInContent(
                                 article.description.length > CHARACTER_LIMIT 
@@ -116,12 +116,12 @@ export default function FeedCard({ article, highlightText }) {
 
                 {/* Author */}
                 {article.author && (
-                    <p className="mt-3 text-xs text-gray-500">
+                    <p className="mt-3 text-xs text-gray-500 dark:text-gray-600">
                         By {article.author}
                     </p>
                 )}
                 
-                <div className={`mt-4 text-gray-300 font-medium opacity-0 transform translate-y-4 transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : ''}`}>
+                <div className={`mt-4 text-gray-300 dark:text-gray-400 font-medium opacity-0 transform translate-y-4 transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : ''}`}>
                     Click to read full article
                 </div>
             </div>

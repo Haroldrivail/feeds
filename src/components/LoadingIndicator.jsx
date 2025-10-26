@@ -3,8 +3,8 @@ import React from 'react';
 export default function LoadingIndicator() {
   return (
     <div className="flex flex-col items-center justify-center py-10">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gray-500"></div>
-      <p className="mt-4 text-gray-400 font-semibold">Loading...</p>
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gray-500 dark:border-gray-400"></div>
+      <p className="mt-4 text-gray-400 dark:text-gray-500 font-semibold">Loading...</p>
     </div>
   );
 }

@@ -92,13 +92,13 @@ export default function SearchForm({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Search news articles..."
-          className={`w-full px-4 py-3 pl-12 border-2 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none transition-colors ${
-            isFocused ? 'border-gray-400' : 'border-gray-200'
+          className={`w-full px-4 py-3 pl-12 border-2 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition-colors ${
+            isFocused ? 'border-gray-400 dark:border-gray-500' : 'border-gray-200 dark:border-gray-700'
           }`}
         />
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg 
-            className={`w-5 h-5 ${isSearching ? 'text-gray-600 animate-pulse' : 'text-gray-400'}`} 
+            className={`w-5 h-5 ${isSearching ? 'text-gray-600 dark:text-gray-400 animate-pulse' : 'text-gray-400 dark:text-gray-500'}`} 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -109,7 +109,7 @@ export default function SearchForm({
       </div>
       <button
         type="submit"
-        className={`px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center ${
+        className={`px-6 py-3 bg-gray-900 dark:bg-gray-800 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors flex items-center justify-center ${
           isSearching ? 'opacity-75' : ''
         }`}
         disabled={isSearching}
