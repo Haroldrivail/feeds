@@ -116,7 +116,7 @@ feeds/
    Create a `.env` file in the root directory:
    ```env
    VITE_NEWS_API_BASE_URL=https://newsapi.org/v2
-   VITE_NEWS_API_KEY=your_api_key_here
+   API_KEY=your_api_key_here
    ```
 
 4. **Start the development server**
@@ -165,7 +165,7 @@ npm run lint         # Run ESLint to check code quality
 
 3. **Add Environment Variable**
    - In Vercel dashboard, go to Settings → Environment Variables
-   - Add `VITE_NEWS_API_KEY` with your News API key
+   - Add `API_KEY` with your News API key
    - Add `VITE_NEWS_API_BASE_URL` with value `https://newsapi.org/v2`
 
 4. **Deploy**
@@ -227,7 +227,7 @@ The project uses Tailwind CSS v4 with CSS-based configuration:
 
 ### Environment Variables
 - `VITE_NEWS_API_BASE_URL` - News API base URL
-- `VITE_NEWS_API_KEY` - Your News API key
+- `API_KEY` - Your News API key
 
 ## 🌐 Browser Support
 
@@ -282,4 +282,4 @@ This project is licensed under the MIT License.
 
 ---
 
-Made with ❤️ by Harold Rivail
+Made with ❤️ by Harold DONGMO
