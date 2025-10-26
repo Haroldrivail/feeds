@@ -259,7 +259,7 @@ This project is licensed under the MIT License.
 
 ## 👤 Author
 
-**Harold Rivail**
+**Harold DONGMO**
 - GitHub: [@Haroldrivail](https://github.com/Haroldrivail)
 
 ## 🙏 Acknowledgments
