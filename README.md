@@ -2,20 +2,22 @@
 
 A modern, responsive news aggregator built with React, Vite, and Tailwind CSS. Stay informed with the latest news from around the world, featuring real-time search, infinite scrolling, and a beautiful dark mode interface.
 
-![React](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
-![Vite](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
-![Tailwind CSS](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
-![License](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+![React](https://img.shields.io/badge/React-19.1.1-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-7.1.7-purple?logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.16-06B6D4?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
 ### 🎨 User Interface
+
 - **Dark/Light Theme Toggle** - Seamless theme switching with persistent preferences
 - **Responsive Design** - Optimized for mobile, tablet, and desktop devices
 - **Smooth Animations** - Polished transitions and hover effects
 - **Back to Top Button** - Quick navigation with scroll progress indicator
 
 ### 📰 News Features
+
 - **Top Headlines** - Latest breaking news from trusted sources
 - **Category Browsing** - Explore news by category (Business, Technology, Sports, Health, Science, Entertainment, General)
 - **Advanced Search** - Real-time search with debouncing for better performance
@@ -23,12 +25,14 @@ A modern, responsive news aggregator built with React, Vite, and Tailwind CSS. S
 - **Search Highlighting** - Highlights matching terms in article titles and descriptions
 
 ### 🚀 Performance
+
 - **API Caching** - 15-minute cache to reduce API calls and improve speed
 - **Retry Logic** - Automatic retry on failed requests with exponential backoff
 - **Optimized Loading** - Skeleton loaders for better perceived performance
 - **Lazy Loading** - Images and content load on demand
 
 ### 🎯 User Experience
+
 - **Breadcrumb Navigation** - Easy navigation between pages
 - **Article Previews** - View source, author, and publication date
 - **Error Handling** - Graceful error messages and fallbacks
@@ -38,16 +42,19 @@ A modern, responsive news aggregator built with React, Vite, and Tailwind CSS. S
 ## 🛠️ Tech Stack
 
 ### Frontend Framework
+
 - **React 19.1.1** - Latest React with improved performance
 - **React Router DOM 7.5.0** - Client-side routing
 - **Vite 7.1.7** - Lightning-fast build tool and dev server
 
 ### Styling
+
 - **Tailwind CSS 4.1.16** - Utility-first CSS framework
 - **CSS Custom Properties** - Dynamic theming support
 - **Responsive Grid** - Flexible layouts for all screen sizes
 
 ### Code Quality
+
 - **ESLint** - Code linting and best practices
 - **React Hooks ESLint** - Hooks usage validation
 - **Modern JavaScript** - ES6+ features
@@ -56,141 +63,116 @@ A modern, responsive news aggregator built with React, Vite, and Tailwind CSS. S
 
 ```
 feeds/
-├── api/
-│   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                   # Serverless proxy for News API (CORS fix)
+├── netlify/
+│   └── functions/
+│       └── news.js               # Serverless proxy for News API (CORS fix)
 ├── public/
-│   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                 # App logo
+│   └── logo.svg                  # App logo
 ├── src/
 │   ├── assets/                   # Static assets
 │   ├── components/
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip         # Scroll-to-top button with progress
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip          # Article card component
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip            # Site footer
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip            # Navigation header with theme toggle
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip # Loading spinner
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip        # Debounced search input
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip    # Loading placeholder
+│   │   ├── BackToTop.jsx         # Scroll-to-top button with progress
+│   │   ├── FeedCard.jsx          # Article card component
+│   │   ├── Footer.jsx            # Site footer
+│   │   ├── Header.jsx            # Navigation header with theme toggle
+│   │   ├── LoadingIndicator.jsx  # Loading spinner
+│   │   ├── SearchForm.jsx        # Debounced search input
+│   │   └── SkeletonLoader.jsx    # Loading placeholder
 │   ├── contexts/
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip      # Theme management (dark/light mode)
+│   │   └── ThemeContext.jsx      # Theme management (dark/light mode)
 │   ├── hooks/
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip  # Custom infinite scroll hook
+│   │   └── useInfiniteScroll.js  # Custom infinite scroll hook
 │   ├── layouts/
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip            # Main layout wrapper
+│   │   └── Layout.jsx            # Main layout wrapper
 │   ├── pages/
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip              # Homepage with top headlines
-│   │   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip     # Category-specific articles
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip            # Category selection page
+│   │   ├── Home.jsx              # Homepage with top headlines
+│   │   ├── TopicArticles.jsx     # Category-specific articles
+│   │   └── Topics.jsx            # Category selection page
 │   ├── utils/
-│   │   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip               # API client with caching & retry logic
-│   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                   # Root component with routing
-│   ├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                  # Application entry point
-│   └── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                 # Global styles & Tailwind config
-├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip              # ESLint configuration
-├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                # Vite configuration
-├── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                  # Dependencies and scripts
-└── https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip                     # Project documentation
+│   │   └── api.jsx               # API client with caching & retry logic
+│   ├── App.jsx                   # Root component with routing
+│   ├── main.jsx                  # Application entry point
+│   └── index.css                 # Global styles & Tailwind config
+├── eslint.config.js              # ESLint configuration
+├── vite.config.js                # Vite configuration
+├── package.json                  # Dependencies and scripts
+└── README.md                     # Project documentation
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip** (v18 or higher)
+
+- **Node.js** (v18 or higher)
 - **npm** or **yarn**
-- **News API Key** - Get your free API key from [https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+- **News API Key** - Get your free API key from [newsapi.org](https://newsapi.org)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
-   git clone https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip
+   git clone https://github.com/Haroldrivail/feeds.git
    cd feeds
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
-   
+
    Create a `.env` file in the root directory:
+
    ```env
-   https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip
-   API_KEY=your_api_key_here
+   VITE_API_BASE_URL=https://newsapi.org/v2
+   VITE_API_KEY=your_api_key_here
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Open your browser**
-   
+
    Navigate to `http://localhost:5173`
 
 ## 📝 Available Scripts
 
 ### Development
+
 ```bash
 npm run dev          # Start development server with hot reload
 ```
 
 ### Production
+
 ```bash
 npm run build        # Build for production
 npm run preview      # Preview production build locally
 ```
 
 ### Code Quality
+
 ```bash
 npm run lint         # Run ESLint to check code quality
 ```
 
-## 🚀 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. **Push your code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
-   ```
-
-2. **Import to Vercel**
-   - Go to [https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
-   - Click "Import Project"
-   - Select your GitHub repository
-   - Vercel will auto-detect Vite settings
-
-3. **Add Environment Variable**
-   - In Vercel dashboard, go to Settings → Environment Variables
-   - Add `API_KEY` with your News API key
-   - Add `VITE_NEWS_API_BASE_URL` with value `https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip`
-
-4. **Deploy**
-   - Click "Deploy"
-   - Your app will be live at `https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip`
-
-### Important: CORS and API Proxy
-
-The app uses a serverless function (`https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip`) to proxy News API requests. This is required because News API's free tier doesn't allow browser requests from deployed domains (CORS restriction).
-
-**How it works:**
-- **Development** (localhost): Direct API calls work fine
-- **Production** (Vercel): Requests go through `/api/news` proxy
-
-The proxy is automatically configured in `https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip` and `https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip`.
-
 ## 🎨 Features in Detail
 
 ### Dark/Light Theme
+
 - Automatic system preference detection
 - Manual toggle with persistent storage
 - Smooth transitions between themes
 - Tailwind v4 CSS-based dark mode configuration
 
 ### Infinite Scroll
+
 - Custom React hook for scroll detection
 - Automatic loading when near bottom (300px threshold)
 - Throttled scroll events for performance
@@ -198,6 +180,7 @@ The proxy is automatically configured in `https://raw.githubusercontent.com/Haro
 - Works with both search and category browsing
 
 ### API Integration
+
 - **Caching Strategy**: 15-minute cache to reduce API calls
 - **Retry Logic**: Up to 3 retries with exponential backoff
 - **Error Handling**: Graceful fallbacks and user-friendly messages
@@ -207,6 +190,7 @@ The proxy is automatically configured in `https://raw.githubusercontent.com/Haro
   - Category filtering for targeted news
 
 ### Search Functionality
+
 - **Debounced Input**: 800ms delay to reduce API calls
 - **Real-time Results**: Updates as you type
 - **Search Highlighting**: Matches are highlighted in results
@@ -215,6 +199,7 @@ The proxy is automatically configured in `https://raw.githubusercontent.com/Haro
 ## 🔧 Configuration
 
 ### Tailwind CSS v4
+
 The project uses Tailwind CSS v4 with CSS-based configuration:
 
 ```css
@@ -226,8 +211,10 @@ The project uses Tailwind CSS v4 with CSS-based configuration:
 ```
 
 ### Environment Variables
-- `VITE_NEWS_API_BASE_URL` - News API base URL
-- `API_KEY` - Your News API key
+
+- `VITE_API_BASE_URL` - News API base URL
+- `VITE_API_KEY` - Your News API key (for development)
+- `NEWS_API_KEY` - Your News API key (for production/Netlify)
 
 ## 🌐 Browser Support
 
@@ -260,25 +247,29 @@ This project is licensed under the MIT License.
 ## 👤 Author
 
 **Harold DONGMO**
-- GitHub: [@Haroldrivail](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+
+- GitHub: [@Haroldrivail](https://github.com/Haroldrivail)
 
 ## 🙏 Acknowledgments
 
-- [News API](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip) - For providing the news data
-- [Tailwind CSS](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip) - For the utility-first CSS framework
-- [React](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip) - For the powerful UI library
-- [Vite](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip) - For the blazing-fast build tool
+- [News API](https://newsapi.org) - For providing the news data
+- [Tailwind CSS](https://tailwindcss.com) - For the utility-first CSS framework
+- [React](https://react.dev) - For the powerful UI library
+- [Vite](https://vite.dev) - For the blazing-fast build tool
 
 ## 📸 Screenshots
 
 ### Light Mode
-![Light Mode](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+
+![Light Mode](screenshots/light-mode.png)
 
 ### Dark Mode
-![Dark Mode](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+
+![Dark Mode](screenshots/dark-mode.png)
 
 ### Category Browsing
-![Categories](https://raw.githubusercontent.com/Haroldrivail/feeds/main/src/assets/feeds-3.3.zip)
+
+![Categories](screenshots/categories.png)
 
 ---
 
