@@ -106,23 +106,21 @@ export default function Topics() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero bg-base-200 py-16">
-        <div className="hero-content text-center">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl font-bold">News Categories</h1>
-            <p className="py-6 text-base-content/70">
-              Explore news organized by categories to find stories that interest
-              you most
-            </p>
-          </div>
+      <section className="bg-base-200 py-8 md:py-16 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <h1 className="text-3xl md:text-5xl font-bold">News Categories</h1>
+          <p className="py-4 md:py-6 text-base-content/70">
+            Explore news organized by categories to find stories that interest
+            you most
+          </p>
         </div>
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-base-100">
-        <div className="container mx-auto px-4">
+      <section className="py-8 md:py-16 px-4">
+        <div className="max-w-6xl mx-auto">
           {error && (
-            <div className="alert alert-error mb-8 max-w-3xl mx-auto">
+            <div className="alert alert-error mb-6 md:mb-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="stroke-current shrink-0 h-6 w-6"
@@ -143,21 +141,19 @@ export default function Topics() {
           {isLoading ? (
             <LoadingIndicator size="lg" text="Loading categories..." />
           ) : (
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <p className="text-base-content/60 text-lg mb-8">
-                  Choose from our diverse selection of news categories to stay
-                  informed about topics you care about.
-                </p>
-              </div>
+            <>
+              <p className="text-center text-base-content/60 mb-8 md:mb-12">
+                Choose from our diverse selection of news categories to stay
+                informed about topics you care about.
+              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 {categories.map((category) => (
                   <CategoryCard key={category.id} category={category} />
                 ))}
               </div>
 
-              <div className="text-center mt-12">
+              <div className="text-center mt-8 md:mt-12">
                 <Link to="/" className="btn btn-neutral">
                   <svg
                     className="w-5 h-5 mr-2"
@@ -175,7 +171,7 @@ export default function Topics() {
                   Back to Home
                 </Link>
               </div>
-            </div>
+            </>
           )}
         </div>
       </section>

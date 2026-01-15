@@ -3,9 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import FeedCard from "../components/FeedCard";
 import SkeletonLoader from "../components/SkeletonLoader";
 import SearchForm from "../components/SearchForm";
+import LoadingIndicator from "../components/LoadingIndicator";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import { getNewsByCategory, searchNews } from "../utils/api";
-import LoadingIndicator from "../components/LoadingIndicator";
 
 export default function TopicArticles() {
   const { topicId } = useParams();
@@ -156,57 +156,46 @@ export default function TopicArticles() {
   return (
     <>
       {/* Header Section */}
-      <section className="bg-base-200 py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Breadcrumb */}
-            <div className="breadcrumbs text-sm mb-6">
-              <ul>
-                <li>
-                  <Link to="/">
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                    </svg>
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/topics">Categories</Link>
-                </li>
-                <li>{categoryNames[topicId] || topicId}</li>
-              </ul>
-            </div>
+      <section className="bg-base-200 py-8 md:py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <div className="breadcrumbs text-sm mb-4 md:mb-6">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/topics">Categories</Link>
+              </li>
+              <li>{categoryNames[topicId] || topicId}</li>
+            </ul>
+          </div>
 
-            <div className="text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h1>
+          <div className="text-center">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4">{heading}</h1>
 
-              {totalResults > 0 && (
-                <p className="text-base-content/60 mb-6">
-                  {totalResults.toLocaleString()} articles available
-                </p>
-              )}
+            {totalResults > 0 && (
+              <p className="text-base-content/60 mb-4 md:mb-6">
+                {totalResults.toLocaleString()} articles available
+              </p>
+            )}
 
-              <div className="max-w-md mx-auto">
-                <SearchForm
-                  search={search}
-                  setSearch={setSearch}
-                  handleSearch={(query) => handleSearch(query, 1, false)}
-                />
-              </div>
+            <div className="max-w-md mx-auto">
+              <SearchForm
+                search={search}
+                setSearch={setSearch}
+                handleSearch={(query) => handleSearch(query, 1, false)}
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Articles Section */}
-      <section className="py-16 bg-base-100">
-        <div className="container mx-auto px-4">
+      <section className="py-8 md:py-16 px-4">
+        <div className="max-w-7xl mx-auto">
           {error && (
-            <div className="alert alert-error mb-8 max-w-3xl mx-auto">
+            <div className="alert alert-error mb-6 md:mb-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="stroke-current shrink-0 h-6 w-6"
@@ -252,7 +241,7 @@ export default function TopicArticles() {
                           categoryNames[topicId] || topicId
                         }`}
                   </p>
-                  <div className="flex justify-center gap-4">
+                  <div className="flex flex-col sm:flex-row justify-center gap-4">
                     {search && (
                       <button
                         onClick={() => fetchCategoryArticles(1, false)}
@@ -268,7 +257,7 @@ export default function TopicArticles() {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 {articles.map((article, index) => (
                   <FeedCard
                     key={`${article.url}-${index}`}
@@ -285,8 +274,8 @@ export default function TopicArticles() {
 
               {/* Results info and navigation */}
               {articles.length > 0 && !isLoadingMore && (
-                <div className="text-center mt-8">
-                  <p className="text-base-content/50 mb-4">
+                <div className="text-center mt-6 md:mt-8">
+                  <p className="text-base-content/50 mb-4 text-sm md:text-base">
                     {hasMore
                       ? `Showing ${
                           articles.length

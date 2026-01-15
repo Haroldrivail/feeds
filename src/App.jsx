@@ -4,6 +4,8 @@ import Layout from './layouts/Layout.jsx'
 import Home from './pages/Home.jsx'
 import Topics from './pages/Topics.jsx'
 import TopicArticles from './pages/TopicArticles.jsx'
+import About from './pages/About.jsx'
+import Contact from './pages/Contact.jsx'
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/topics/:topicId" element={<TopicArticles />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Layout>
   )

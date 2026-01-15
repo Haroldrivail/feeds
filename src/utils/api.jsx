@@ -1,4 +1,4 @@
-// Helper function to retry failed fetch requests
+
 export const fetchWithRetry = async (url, retries = 3, delay = 1000) => {
   let lastError;
 
@@ -22,7 +22,7 @@ export const fetchWithRetry = async (url, retries = 3, delay = 1000) => {
 };
 
 const apiCache = new Map();
-const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes for news articles
+const CACHE_DURATION = 15 * 60 * 1000; 
 
 export const fetchWithCache = async (url, forceRefresh = false) => {
   const now = Date.now();
@@ -45,21 +45,21 @@ export const fetchWithCache = async (url, forceRefresh = false) => {
   return data;
 };
 
-// News API configuration
-// Use proxy in production to avoid CORS issues
+
+
 const IS_PRODUCTION = import.meta.env.PROD;
 const API_PROXY = "/api/news";
 const NEWS_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const NEWS_API_KEY = import.meta.env.VITE_API_KEY;
 
-// Helper function to build News API URLs
+
 const buildNewsApiUrl = (endpoint, params = {}) => {
-  // In production, use the serverless proxy
+  
   if (IS_PRODUCTION) {
     const url = new URL(API_PROXY, window.location.origin);
     url.searchParams.append("endpoint", endpoint);
 
-    // Add other parameters
+    
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== "") {
         url.searchParams.append(key, value);
@@ -69,13 +69,13 @@ const buildNewsApiUrl = (endpoint, params = {}) => {
     return url.toString();
   }
 
-  // In development, use News API directly
+  
   const url = new URL(`${NEWS_API_BASE_URL}${endpoint}`);
 
-  // Add API key
+  
   url.searchParams.append("apiKey", NEWS_API_KEY);
 
-  // Add other parameters
+  
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
       url.searchParams.append(key, value);
@@ -85,7 +85,7 @@ const buildNewsApiUrl = (endpoint, params = {}) => {
   return url.toString();
 };
 
-// Fetch news articles based on search query
+
 export const searchNews = async (query, options = {}) => {
   const {
     language = "en",
@@ -124,7 +124,7 @@ export const searchNews = async (query, options = {}) => {
   }
 };
 
-// Fetch top headlines
+
 export const getTopHeadlines = async (options = {}) => {
   const {
     country = "us",
@@ -136,7 +136,7 @@ export const getTopHeadlines = async (options = {}) => {
 
   try {
     const url = buildNewsApiUrl("/top-headlines", {
-      country: sources ? null : country, // Don't use country if sources are specified
+      country: sources ? null : country, 
       category,
       sources,
       pageSize,
@@ -156,7 +156,7 @@ export const getTopHeadlines = async (options = {}) => {
   }
 };
 
-// Fetch news by category
+
 export const getNewsByCategory = async (category, options = {}) => {
   return getTopHeadlines({
     ...options,

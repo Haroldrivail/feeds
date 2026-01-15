@@ -47,8 +47,8 @@ export default function Home() {
           updatedArticles.length < (data.totalResults || 0)
       );
       setHeading("Latest News");
-    } catch (error) {
-      setError(`Error fetching news: ${error.message}`);
+    } catch {
+      setError(`Error fetching news`);
       setHasMore(false);
     } finally {
       setIsLoading(false);
@@ -130,35 +130,35 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero bg-base-200 py-16">
-        <div className="hero-content text-center">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl font-bold">
-              Stay Informed with Latest News
-            </h1>
-            <p className="py-6 text-base-content/70">
-              Discover breaking news, trending stories, and in-depth articles
-              from trusted sources around the world.
-            </p>
-            <div className="max-w-md mx-auto">
-              <SearchForm
-                search={search}
-                setSearch={setSearch}
-                handleSearch={(query) => handleSearch(query, 1, false)}
-                autoFocus={true}
-              />
-            </div>
+      <section className="bg-base-200 py-8 md:py-16 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <h1 className="text-3xl md:text-5xl font-bold">
+            Stay Informed with Latest News
+          </h1>
+          <p className="py-4 md:py-6 text-base-content/70">
+            Discover breaking news, trending stories, and in-depth articles from
+            trusted sources around the world.
+          </p>
+          <div className="max-w-md mx-auto">
+            <SearchForm
+              search={search}
+              setSearch={setSearch}
+              handleSearch={(query) => handleSearch(query, 1, false)}
+              autoFocus={true}
+            />
           </div>
         </div>
       </section>
 
       {/* News Results Section */}
-      <section className="py-16 bg-base-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-8">{heading}</h2>
+      <section className="py-8 md:py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold mb-6 md:mb-8">
+            {heading}
+          </h2>
 
           {error && (
-            <div className="alert alert-error mb-8">
+            <div className="alert alert-error mb-6 md:mb-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="stroke-current shrink-0 h-6 w-6"
@@ -209,7 +209,7 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 {articles.map((article, index) => (
                   <FeedCard
                     key={`${article.url}-${index}`}
@@ -219,14 +219,12 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Loading more indicator */}
               {isLoadingMore && (
                 <LoadingIndicator size="md" text="Loading more articles..." />
               )}
 
-              {/* Results info */}
               {articles.length > 0 && !isLoadingMore && (
-                <p className="text-center text-base-content/50 mt-8">
+                <p className="text-center text-base-content/50 mt-6 md:mt-8 text-sm md:text-base">
                   {hasMore
                     ? `Showing ${
                         articles.length

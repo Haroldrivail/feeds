@@ -1,4 +1,5 @@
 import React from "react";
+import { Image as LucideImage, ExternalLink } from "lucide-react";
 
 export default function FeedCard({ article, highlightText = "" }) {
   const formatDate = (dateString) => {
@@ -55,19 +56,7 @@ export default function FeedCard({ article, highlightText = "" }) {
             article.urlToImage ? "hidden" : "flex"
           }`}
         >
-          <svg
-            className="w-12 h-12 text-base-content/30"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-            ></path>
-          </svg>
+          <LucideImage className="w-12 h-12 text-base-content/30" />
         </div>
         {article.source?.name && (
           <div className="absolute top-2 left-2">
@@ -87,7 +76,9 @@ export default function FeedCard({ article, highlightText = "" }) {
         <div className="flex items-center justify-between mt-4 text-xs text-base-content/50">
           <span>{formatDate(article.publishedAt)}</span>
           {article.author && (
-            <span className="truncate max-w-[120px]">By {article.author}</span>
+            <span className="truncate max-w-[120px]">
+              By {article.author}
+            </span>
           )}
         </div>
         <div className="card-actions justify-end mt-2">
@@ -98,19 +89,7 @@ export default function FeedCard({ article, highlightText = "" }) {
             className="btn btn-primary btn-sm"
           >
             Read More
-            <svg
-              className="w-4 h-4 ml-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              ></path>
-            </svg>
+            <ExternalLink className="w-4 h-4 ml-1" />
           </a>
         </div>
       </div>
