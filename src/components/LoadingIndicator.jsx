@@ -1,10 +1,20 @@
-import React from 'react';
+import React from "react";
 
-export default function LoadingIndicator() {
+export default function LoadingIndicator({ size = "lg", text = "Loading..." }) {
+  const sizeClasses = {
+    sm: "loading-sm",
+    md: "loading-md",
+    lg: "loading-lg",
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center py-10">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gray-500 dark:border-gray-400"></div>
-      <p className="mt-4 text-gray-400 dark:text-gray-500 font-semibold">Loading...</p>
+    <div className="flex flex-col items-center justify-center py-12">
+      <span
+        className={`loading loading-spinner ${
+          sizeClasses[size] || sizeClasses.lg
+        }`}
+      ></span>
+      {text && <p className="mt-4 text-base-content/70">{text}</p>}
     </div>
   );
 }

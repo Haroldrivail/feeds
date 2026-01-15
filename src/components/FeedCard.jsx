@@ -1,130 +1,119 @@
-import React, { useState } from 'react';
+import React from "react";
 
-export default function FeedCard({ article, highlightText }) {
-    const CHARACTER_LIMIT = 150;
-    const [isHovered, setIsHovered] = useState(false);
+export default function FeedCard({ article, highlightText = "" }) {
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
-    const handleArticleClick = () => {
-        if (article.url) {
-            window.open(article.url, '_blank', 'noopener,noreferrer');
-        }
-    };
-
-    // Function to highlight search terms in text
-    const highlightTextInContent = (text) => {
-        if (!highlightText || !text || !text.toLowerCase().includes(highlightText.toLowerCase())) {
-            return text;
-        }
-
-        const regex = new RegExp(`(${highlightText})`, 'gi');
-        const parts = text.split(regex);
-
-        return (
-            <>
-                {parts.map((part, i) =>
-                    part.toLowerCase() === highlightText.toLowerCase() ?
-                        <span key={i} className="text-gray-300 dark:text-gray-400 font-semibold">{part}</span> :
-                        part
-                )}
-            </>
-        );
-    };
-
-    // Format date for display
-    const formatDate = (dateString) => {
-        if (!dateString) return 'Unknown date';
-        
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 0) {
-            return 'Today';
-        } else if (diffDays === 1) {
-            return 'Yesterday';
-        } else if (diffDays < 7) {
-            return `${diffDays} days ago`;
-        } else {
-            return date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            });
-        }
-    };
-
-    // Get fallback image if article image is not available
-    const getImageSrc = () => {
-        return article.urlToImage || '/placeholder-news.jpg';
-    };
-
-    return (
-        <div
-            className="w-full bg-gray-800 dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
-            onClick={handleArticleClick}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+  const highlightMatch = (text) => {
+    if (!highlightText || !text) return text;
+    const regex = new RegExp(`(${highlightText})`, "gi");
+    const parts = text.split(regex);
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <mark
+          key={index}
+          className="bg-warning text-warning-content px-1 rounded"
         >
-            <div className="relative">
-                <img
-                    className="w-full h-48 object-cover rounded-t-lg transition-transform duration-500"
-                    style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}
-                    src={getImageSrc()}
-                    alt={article.title || 'News article'}
-                    onError={(e) => {
-                        e.target.src = '/placeholder-news.jpg';
-                    }}
-                />
-                
-                {/* Source badge */}
-                {article.source?.name && (
-                    <div className="absolute top-2 left-2">
-                        <span className="px-2 py-1 bg-gray-600 dark:bg-gray-700 bg-opacity-80 text-white text-xs rounded-full">
-                            {article.source.name}
-                        </span>
-                    </div>
-                )}
-
-                {/* Published date */}
-                <div className="absolute bottom-2 right-2">
-                    <span className="px-2 py-1 bg-gray-900 dark:bg-black bg-opacity-80 text-white text-xs rounded-full">
-                        {formatDate(article.publishedAt)}
-                    </span>
-                </div>
-            </div>
-
-            <div className="p-4">
-                <h2 className="text-lg font-bold text-white leading-tight mb-2 line-clamp-2">
-                    {highlightText ? highlightTextInContent(article.title) : article.title}
-                </h2>
-                
-                {article.description && (
-                    <p className="mt-2 text-gray-400 dark:text-gray-500 text-sm leading-relaxed">
-                        {highlightText ? 
-                            highlightTextInContent(
-                                article.description.length > CHARACTER_LIMIT 
-                                    ? `${article.description.slice(0, CHARACTER_LIMIT)}...`
-                                    : article.description
-                            ) :
-                            article.description.length > CHARACTER_LIMIT 
-                                ? `${article.description.slice(0, CHARACTER_LIMIT)}...`
-                                : article.description
-                        }
-                    </p>
-                )}
-
-                {/* Author */}
-                {article.author && (
-                    <p className="mt-3 text-xs text-gray-500 dark:text-gray-600">
-                        By {article.author}
-                    </p>
-                )}
-                
-                <div className={`mt-4 text-gray-300 dark:text-gray-400 font-medium opacity-0 transform translate-y-4 transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : ''}`}>
-                    Click to read full article
-                </div>
-            </div>
-        </div>
+          {part}
+        </mark>
+      ) : (
+        part
+      )
     );
+  };
+
+  const truncateText = (text, maxLength) => {
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
+
+  return (
+    <div className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+      <figure className="relative h-48 overflow-hidden">
+        {article.urlToImage ? (
+          <img
+            src={article.urlToImage}
+            alt={article.title}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            onError={(e) => {
+              e.target.style.display = "none";
+              e.target.nextSibling.style.display = "flex";
+            }}
+          />
+        ) : null}
+        <div
+          className={`w-full h-full bg-base-300 flex items-center justify-center ${
+            article.urlToImage ? "hidden" : "flex"
+          }`}
+        >
+          <svg
+            className="w-12 h-12 text-base-content/30"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+            ></path>
+          </svg>
+        </div>
+        {article.source?.name && (
+          <div className="absolute top-2 left-2">
+            <span className="badge badge-primary badge-sm">
+              {article.source.name}
+            </span>
+          </div>
+        )}
+      </figure>
+      <div className="card-body p-4">
+        <h2 className="card-title text-base line-clamp-2">
+          {highlightMatch(article.title)}
+        </h2>
+        <p className="text-base-content/70 text-sm line-clamp-3">
+          {highlightMatch(truncateText(article.description, 120))}
+        </p>
+        <div className="flex items-center justify-between mt-4 text-xs text-base-content/50">
+          <span>{formatDate(article.publishedAt)}</span>
+          {article.author && (
+            <span className="truncate max-w-[120px]">By {article.author}</span>
+          )}
+        </div>
+        <div className="card-actions justify-end mt-2">
+          <a
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary btn-sm"
+          >
+            Read More
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 }
